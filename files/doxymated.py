@@ -43,6 +43,8 @@ def log_setup():
    doxylog.write('logs from doxymated python script run on '+ today+'\n\n\n')
    doxylog.close()
 
+
+   return documents_location
    
 
 
@@ -54,10 +56,7 @@ def log_setup():
 #Automation function is created
 def automation():
    
-   """This function runs a command that schedules this script to be run in 7 days 
-   form now in order for this to work you have to set the script to be used 
-   certain time of the week with at, then it will automatically run at that 
-   time every week unil the at ilde at command is terminated"""
+   """This function runs a command that schedules this script to be run in 7 days form now"""
 
    #A command is run that makes the script run again in 7 days time  
    os.system ('echo "python doxymated.py"  | at now + 7 days')
@@ -78,11 +77,15 @@ def clone_repos(i):
    os.chdir(i)
 
    #The up to date repos are cloned
+
    os.system("git clone https://github.com/team/" + i) 
 
 
 
       
+
+
+
 
 
 
@@ -94,7 +97,7 @@ def run_doxy (i):
 
 
 
-   #The placeholders from the template config file are declaired to options array
+   #The placeholders from the template config file is saved to options array
    option = ['proj_name','proj_number','proj_brief','out_dir','project_lan_c','project_lan_java']
 
 
@@ -103,7 +106,7 @@ def run_doxy (i):
       java = "YES"
       c = "NO"
 
-      #If script is not working on proj3 config file is optimized for c
+      #If script is not working on scripts config file is optimized for c
    else:
       java = "NO"
       c = "YES"
@@ -130,8 +133,8 @@ def run_doxy (i):
       #The specified options are found then changed
       fout.write(line.replace(option[0] ,i)
       .replace(option[1],today)
-      .replace(option[2],'automated documentation created for ' +i+ ' repository')
-      .replace(option[3],documents_location +'/'+ i)
+      .replace(option[2],"\"automated documentation created for " +i+ " repository\"")
+      .replace(option[3],documents_location +"/"+ i)
       .replace(option[4],c)
       .replace(option[5],java))
 
